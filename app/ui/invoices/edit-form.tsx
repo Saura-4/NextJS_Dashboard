@@ -1,6 +1,8 @@
 'use client';
 
+
 import { CustomerField, InvoiceForm } from '@/app/lib/definitions';
+import { updateInvoice } from '@/app/lib/action';
 import {
   CheckIcon,
   ClockIcon,
@@ -10,6 +12,7 @@ import {
 import Link from 'next/link';
 import { Button } from '@/app/ui/button';
 
+
 export default function EditInvoiceForm({
   invoice,
   customers,
@@ -17,16 +20,17 @@ export default function EditInvoiceForm({
   invoice: InvoiceForm;
   customers: CustomerField[];
 }) {
-  return (
-    <form>
-      <div className="rounded-md bg-gray-50 p-4 md:p-6">
-        {/* Customer Name */}
-        <div className="mb-4">
+  const updateInvoiceWithId=updateInvoice.bind(null,invoice.id);
+
+  return <form action={updateInvoiceWithId}>
+    <div className="rounded-md bg-gray-50 p-4 md:p-6">
+
+    <div className="mb-4">
           <label htmlFor="customer" className="mb-2 block text-sm font-medium">
             Choose customer
           </label>
           <div className="relative">
-            <select
+          <select
               id="customer"
               name="customerId"
               className="peer block w-full cursor-pointer rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
@@ -118,6 +122,10 @@ export default function EditInvoiceForm({
         </Link>
         <Button type="submit">Edit Invoice</Button>
       </div>
-    </form>
-  );
+  </form>;
+  // return (
+  //   <form>
+  //     
+  //   </form>
+  // );
 }
